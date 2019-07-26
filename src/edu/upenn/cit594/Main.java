@@ -3,8 +3,8 @@ package edu.upenn.cit594;
 import edu.upenn.cit594.*;
 import edu.upenn.cit594.processor.FinesAnalysis;
 import edu.upenn.cit594.ui.Writer;
-import edu.upenn.cit594.data.PopulationReader;
 import edu.upenn.cit594.datamanagement.ParkingReader;
+import edu.upenn.cit594.datamanagement.PopulationReader;
 
 public class Main {
 

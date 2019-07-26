@@ -23,7 +23,7 @@ public class Writer {
 		try {
 			destFile = new PrintWriter(new FileOutputStream(fileName, false));
 		} catch (FileNotFoundException e) {
-			System.out.println("Error in writing to destination file");
+			System.out.println("Error in writing to destination file: " + fileName);
 			e.printStackTrace();
 		}
 		
@@ -41,7 +41,7 @@ public class Writer {
 		try {
 			destFile = new PrintWriter(new FileOutputStream(fileName, false));
 		} catch (FileNotFoundException e) {
-			System.out.println("Error in writing to destination file");
+			System.out.println("Error in writing to destination file:  " + fileName);
 			e.printStackTrace();
 		}
 		
