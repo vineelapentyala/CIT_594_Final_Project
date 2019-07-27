@@ -1,7 +1,7 @@
 package edu.upenn.cit594.ui;
 
 import edu.upenn.cit594.*;
-import edu.upenn.cit594.data.ParkingViolations;
+import edu.upenn.cit594.data.ParkingViolation;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -16,7 +16,7 @@ import java.util.TreeMap;
 public class Writer {
 
 	// Prints a ArrayList of data?
-	public void txtWriter(List<ParkingViolations> myData, String fileName) {
+	public void txtWriter(List<ParkingViolation> myData, String fileName) {
 		// initialize file to be overwritten
 		PrintWriter destFile = null;
 		
@@ -27,7 +27,7 @@ public class Writer {
 			e.printStackTrace();
 		}
 		
-		for (ParkingViolations data : myData) {
+		for (ParkingViolation data : myData) {
 			// space delimited
 			destFile.print(data.getZip() + " " + data.getFine() + "\n");
 		}

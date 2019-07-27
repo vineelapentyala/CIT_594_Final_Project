@@ -1,10 +1,10 @@
 package edu.upenn.cit594.data;
 
-public class ParkingViolations {
+public class ParkingViolation {
 	private int zip;
 	private double fine;
 	
-	ParkingViolations (int zip, double fine){
+	ParkingViolation (int zip, double fine){
 		this.zip = zip;
 		this.fine = fine;
 	}
