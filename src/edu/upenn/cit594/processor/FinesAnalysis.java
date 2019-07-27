@@ -24,7 +24,7 @@ public class FinesAnalysis {
 	 * @param allParkingViolations A list of all parking violations in PA with zip codes
 	 * @param populationMap A Map of PA zip codes to population
 	 */
-	public FinesAnalysis(List<ParkingViolation> allParkingViolations, Map<Integer, Double> populationMap) {
+	public FinesAnalysis(List<ParkingViolation> allParkingViolations, Map<Integer, Integer> populationMap) {
 		totalFines = new HashMap<Integer, Double>();
 		finesPerCapita = new TreeMap<Integer, Double>();
 		
@@ -48,14 +48,22 @@ public class FinesAnalysis {
 		}
 	}
 
-	// TODO
 	/**
 	 * populateFinesPerCapita uses the existing totalFines hashmap and map of
 	 * zip codes to population to create a TreeMap of fines per capita.
 	 * @param populationMap A Map of PA zip codes to population
 	 */
-	private void populateFinesPerCapita(Map<Integer, Double> populationMap) {
-		
+	private void populateFinesPerCapita(Map<Integer, Integer> populationMap) {
+		for (int zip : totalFines.keySet()) {
+			double totalFine = totalFines.get(zip);
+			int population = populationMap.get(zip);
+			
+			// Calculate fine per capita and add to zip
+			double finePerCapita = totalFine / population;
+			
+			// Automatically excludes zips in population without fines
+			finesPerCapita.put(zip, finePerCapita);
+		}
 	}
 
 	/**

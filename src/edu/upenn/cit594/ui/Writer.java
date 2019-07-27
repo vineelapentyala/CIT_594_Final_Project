@@ -34,7 +34,7 @@ public class Writer {
 		destFile.close();
 	}
 	
-	public void txtWriter(HashMap<Integer, Double> myData, String fileName) {
+	public void txtWriter(Map<Integer, Double> myData, String fileName) {
 		// initialize file to be overwritten
 		PrintWriter destFile = null;
 		
@@ -52,7 +52,7 @@ public class Writer {
 		destFile.close();
 	}
 
-	public void consoleWriter(TreeMap<Integer, Double> myData) {
+	public void consoleWriter(Map<Integer, Double> myData) {
 		// print in ascending order from TreeSet
 		for (Map.Entry<Integer, Double> entry : myData.entrySet()) {
 			// space delimited
