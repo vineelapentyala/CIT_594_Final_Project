@@ -11,8 +11,6 @@ import edu.upenn.cit594.data.ParkingViolation;
  * FinesAnalysis class is part of the Processor tier. It performs the
  * calculations of total fines per zip code and fines per capita in each zip
  * code, then stores this data into appropriate maps for the UI tier to access.
- * 
- * @author angelapwen
  *
  */
 public class FinesAnalysis {
@@ -57,7 +55,7 @@ public class FinesAnalysis {
 	 * @param populationMap A Map of PA zip codes to population
 	 */
 	private void populateFinesPerCapita(Map<Integer, Double> populationMap) {
-
+		
 	}
 
 	/**
