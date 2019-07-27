@@ -17,9 +17,8 @@ public class Main {
 		String parkViolateFilename = args[1]; // this String has file suffix .csv or .json
 		String populationInputFilename = args[2];
 		
-
 		// For all parking violations: create AllParkingViolations in constructor of ParkingReader
-		ParkingReader myParkingReader = new ParkingReader(parkViolateFilename); 
+		ParkingReader myParkingReader = new ParkingReader(parkViolateFilename, fileFormat); 
 		PopulationReader myPopulationReader = new PopulationReader(populationInputFilename);
 		
 		//Call ui Writer, write fines.txt based on allParkingViolations
@@ -27,7 +26,7 @@ public class Main {
 		myWriter.txtWriter(myParkingReader.getAllParkingViolations(), "fines.txt");
 		
 		//Pass list of allParkingViolations and population data to Constructor of Processor
-		FinesAnalysis myFinesAnalysis = new FinesAnalysis(myParkingReader.getAllParkingViolations(), myPopulationReader.getZipPopulation());
+		FinesAnalysis myFinesAnalysis = new FinesAnalysis(myParkingReader.getAllParkingViolations(), myPopulationReader.getPopulationMap());
 		
 		// print total.txt
 		myWriter.txtWriter(myFinesAnalysis.getTotalFines(), "total.txt");		
