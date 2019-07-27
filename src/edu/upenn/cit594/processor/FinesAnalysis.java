@@ -34,7 +34,6 @@ public class FinesAnalysis {
 		populateFinesPerCapita(populationMap);
 	}
 
-	// TODO 
 	/**
 	 * populateTotalFines takes in the list of parking violations and uses its
 	 * data to aggregate the total cost of parking violations in each zip code
@@ -42,7 +41,13 @@ public class FinesAnalysis {
 	 * @param allParkingViolations A list of all parking violations in PA with zip codes
 	 */
 	private void populateTotalFines(List<ParkingViolation> allParkingViolations) {
-		
+		for (ParkingViolation violation : allParkingViolations) {
+			int zip = violation.getZip();
+			double fine = violation.getFine();
+			
+			// If zip exists, add to existing fine; otherwise add new zip code and fine
+			totalFines.put(zip, totalFines.getOrDefault(zip, 0.0) + fine);
+		}
 	}
 
 	// TODO
