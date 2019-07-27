@@ -8,15 +8,33 @@ import org.json.simple.parser.ParseException;
 
 import edu.upenn.cit594.data.ParkingViolation;
 
+/**
+ * ParkingReader class is part of the DataManagement tier. It performs the
+ * task of reading the data from input files related to parking violations
+ * then stores this data into appropriate structures for the processor tier to access.
+ *
+ */
+
 public class ParkingReader {
 
-    private List<ParkingViolation> allParkingViolations;
+    private List<ParkingViolation> allParkingViolations; 
     
+   /**
+    * storeParkingViolations takes in zip and fines as arguments, creates a ParkingViolation Object from them
+    * and stores them to allParkingViolations List
+    * @param zip zipcode where a parking violation occurred
+    * @param fine amount of fine issued for the parking violation
+    */
     private void storeParkingViolations(int zip, double fine) {
 	ParkingViolation thisViolation = new ParkingViolation(zip, fine);
 	allParkingViolations.add(thisViolation);
     }
     
+    /**
+     * parseCSV reads the parking violations data from a .csv file and stores 
+     * all valid parking violations to 'allParkingViolations' List
+     * @param inputFileName .csv file with the parking violations information
+     */
     public void parseCSV(String inputFileName) {
 	File inputFile = new File(inputFileName);
 	String[] violationLine = new String[7];
@@ -38,7 +56,12 @@ public class ParkingReader {
 	}
     }
     
-    private void parseJSON(String inputFileName) {
+    /**
+     * parseJSON reads the parking violations data from a .json file and stores 
+     * all valid parking violations to 'allParkingViolations' List
+     * @param inputFileName .json file with the parking violations information
+     */
+    public void parseJSON(String inputFileName) {
 	JSONParser parser = new JSONParser();
 	
 	try {
@@ -62,7 +85,10 @@ public class ParkingReader {
 	    System.out.println("ParseException");
 	}
     }
-
+    /**
+     * getAllParkingViolations is a getter method for 'allParkingViolations' List
+     * @return allParkingViolations A list of all parking violations in PA with zip codes
+     */
     public List<ParkingViolation> getAllParkingViolations() {
         return allParkingViolations;
     }
