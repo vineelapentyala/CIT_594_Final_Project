@@ -91,10 +91,9 @@ public class ParkingReader {
 		JSONObject violationLine = (JSONObject) iter.next();
 		if (!violationLine.get("zip_code").equals("") && violationLine.get("state").equals("PA")) {
 		    int zip = Integer.parseInt((String) violationLine.get("zip_code"));
-		    double fine = Double.longBitsToDouble((long) violationLine.get("fine"));
+		    double fine =((Long) violationLine.get("fine")).doubleValue();
 		    storeParkingViolations(zip, fine);
 		}
-
 	    }
 
 	} catch (FileNotFoundException e) {
