@@ -57,6 +57,12 @@ public class FinesAnalysis {
 	private void populateFinesPerCapita(Map<Integer, Integer> populationMap) {
 		for (int zip : totalFines.keySet()) {
 			double totalFine = totalFines.get(zip);
+			
+			// TODO Check to make sure this is what they want
+			if (!populationMap.containsKey(zip)) {
+				continue;
+			}
+			
 			int population = populationMap.get(zip);
 			
 			// Calculate fine per capita and add to zip

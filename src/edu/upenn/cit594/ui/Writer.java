@@ -56,7 +56,7 @@ public class Writer {
 		// print in ascending order from TreeSet
 		for (Map.Entry<Integer, Double> entry : myData.entrySet()) {
 			// space delimited
-			System.out.print(entry.getKey() + " " + entry.getValue().intValue() + "\n");
+			System.out.print(entry.getKey() + " " + entry.getValue() + "\n");
 		}
 	}
 }
