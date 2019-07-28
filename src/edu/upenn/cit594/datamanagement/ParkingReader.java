@@ -66,7 +66,6 @@ public class ParkingReader {
 		    }
 		}
 	    }
-	    System.out.println(allParkingViolations.size());
 	    s.close();
 	} catch (FileNotFoundException e) {
 	    System.out.println("Incorrect CSV input File name"); // error message to be displayed when input filename
