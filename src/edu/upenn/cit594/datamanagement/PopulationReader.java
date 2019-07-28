@@ -49,7 +49,6 @@ public class PopulationReader {
 		String[] zipAndpopulation = new String[2];
 		try {
 			Scanner s = new Scanner(inputFile);
-			s.nextLine();
 			while (s.hasNextLine()) {
 				String line = s.nextLine();
 				zipAndpopulation = line.split(" ");

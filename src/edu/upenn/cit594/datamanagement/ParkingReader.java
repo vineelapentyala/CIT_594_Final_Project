@@ -53,22 +53,20 @@ public class ParkingReader {
      */
     private void parseCSV(String inputFileName) {
 	File inputFile = new File(inputFileName);
-
-	String[] violationLine = new String[7];
 	try {
 	    Scanner s = new Scanner(inputFile);
-	    s.nextLine();
 	    while (s.hasNextLine()) {
 		String line = s.nextLine();
-		violationLine = line.split(",");
+		String[] violationLine = line.split(",");
 		if (violationLine.length == 7) {
-		    if (violationLine[6] != null && violationLine[4] == "PA") {
+		    if (violationLine[6] != null && violationLine[4].equals("PA")) {
 			int zip = Integer.parseInt(violationLine[6]);
 			double fine = Integer.parseInt(violationLine[1]);
-			storeParkingViolations(zip, fine);
+			storeParkingViolations(zip, fine);		
 		    }
 		}
 	    }
+	    System.out.println(allParkingViolations.size());
 	    s.close();
 	} catch (FileNotFoundException e) {
 	    System.out.println("Incorrect CSV input File name"); // error message to be displayed when input filename
@@ -91,9 +89,9 @@ public class ParkingReader {
 	    Iterator iter = allViolationLines.iterator();
 	    while (iter.hasNext()) {
 		JSONObject violationLine = (JSONObject) iter.next();
-		if (violationLine.get("zip_code") != "" && violationLine.get("state") == "PA") {
-		    int zip = (int) violationLine.get("zip_code");
-		    double fine = (double) violationLine.get("state");
+		if (!violationLine.get("zip_code").equals("") && violationLine.get("state").equals("PA")) {
+		    int zip = Integer.parseInt((String) violationLine.get("zip_code"));
+		    double fine = Double.longBitsToDouble((long) violationLine.get("fine"));
 		    storeParkingViolations(zip, fine);
 		}
 
