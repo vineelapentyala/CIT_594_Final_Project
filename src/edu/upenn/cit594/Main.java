@@ -32,7 +32,7 @@ public class Main {
 		//Call ui Writer, write fines.txt based on allParkingViolations
 		Writer myWriter = new Writer();
 		myWriter.txtWriter(myParkingReader.getAllParkingViolations(), "fines.txt");
-		
+				
 		//Pass list of allParkingViolations and population data to Constructor of Processor
 		FinesAnalysis myFinesAnalysis = new FinesAnalysis(myParkingReader.getAllParkingViolations(), myPopulationReader.getPopulationMap());
 		

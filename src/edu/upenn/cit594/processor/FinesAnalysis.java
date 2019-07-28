@@ -46,6 +46,7 @@ public class FinesAnalysis {
 			// If zip exists, add to existing fine; otherwise add new zip code and fine
 			totalFines.put(zip, totalFines.getOrDefault(zip, 0.0) + fine);
 		}
+		
 	}
 
 	/**

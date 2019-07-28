@@ -29,7 +29,7 @@ public class Writer {
 		
 		for (ParkingViolation data : myData) {
 			// space delimited
-			destFile.print(data.getZip() + " " + data.getFine() + "\n");
+			destFile.print(data.getZip() + " " + (int)data.getFine() + "\n");
 		}
 		destFile.close();
 	}
@@ -47,7 +47,7 @@ public class Writer {
 		
 		for (Map.Entry<Integer, Double> entry : myData.entrySet()) {
 			// space delimited
-			destFile.print(entry.getKey() + " " + entry.getValue() + "\n");
+			destFile.print(entry.getKey() + " " + entry.getValue().intValue() + "\n");
 		}
 		destFile.close();
 	}
@@ -56,7 +56,7 @@ public class Writer {
 		// print in ascending order from TreeSet
 		for (Map.Entry<Integer, Double> entry : myData.entrySet()) {
 			// space delimited
-			System.out.print(entry.getKey() + " " + entry.getValue() + "\n");
+			System.out.print(entry.getKey() + " " + entry.getValue().intValue() + "\n");
 		}
 	}
 }
