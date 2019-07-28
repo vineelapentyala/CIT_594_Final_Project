@@ -49,9 +49,11 @@ public class ParkingReader {
 	 * valid parking violations to 'allParkingViolations' List
 	 * 
 	 * @param inputFileName .csv file with the parking violations information
+	 * @throws FileNotFoundException 
 	 */
 	private void parseCSV(String inputFileName) {
 		File inputFile = new File(inputFileName);
+		
 		String[] violationLine = new String[7];
 		try {
 			Scanner s = new Scanner(inputFile);

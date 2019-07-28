@@ -2,6 +2,7 @@ package edu.upenn.cit594.datamanagement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -40,9 +41,11 @@ public class PopulationReader {
 	 * populationMap
 	 * 
 	 * @param inputFileName .txt file with population data by zip code
+	 * @throws IOException 
 	 */
 	private void parseTxt(String inputFileName) {
 		File inputFile = new File(inputFileName);
+
 		String[] zipAndpopulation = new String[2];
 		try {
 			Scanner s = new Scanner(inputFile);
