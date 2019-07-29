@@ -9,15 +9,17 @@ package edu.upenn.cit594.data;
 public class ParkingViolation {
 	private int zip;
 	private double fine;
+	private String state;
 	
 	/**
 	 * Initializes the zip code and fine instance variables
 	 * @param zip Zip Code of parking violation
 	 * @param fine Price of the parking violation fine
 	 */
-	public ParkingViolation (int zip, double fine){
+	public ParkingViolation (int zip, double fine, String state){
 		this.zip = zip;
 		this.fine = fine;
+		this.state = state;
 	}
 	
 	/**
@@ -34,6 +36,14 @@ public class ParkingViolation {
 	 */
 	public int getZip() {
 		return zip;
+	}
+	
+	/**
+	 * Gets the state.
+	 * @return String value of state
+	 */
+	public String getState() {
+		return state;
 	}
 	
 }
