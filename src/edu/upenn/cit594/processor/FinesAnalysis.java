@@ -14,13 +14,14 @@ import edu.upenn.cit594.data.ParkingViolation;
  *
  */
 public class FinesAnalysis {
+	private List<ParkingViolation> processedViolations;
 	private Map<Integer, Double> totalFines;
 	private Map<Integer, Double> finesPerCapita;
 
 	/**
 	 * The constructor takes in a list of parking violations and a map of zip
 	 * codes to population. It calls the appropriate private methods to 
-	 * populate both maps in the instance variables.
+	 * populate the list and both maps in the instance variables.
 	 * @param allParkingViolations A list of all parking violations in PA with zip codes
 	 * @param populationMap A Map of PA zip codes to population
 	 */
@@ -28,18 +29,35 @@ public class FinesAnalysis {
 		totalFines = new HashMap<Integer, Double>();
 		finesPerCapita = new TreeMap<Integer, Double>();
 		
-		populateTotalFines(allParkingViolations);
+		processViolations(allParkingViolations);
+		populateTotalFines();
 		populateFinesPerCapita(populationMap);
+	}
+	
+	/**
+	 * processTotalViolations takes in the list of parking violations and 
+	 * processes the data to be excluded, here the licenses that are not PA
+	 * and any violations with missing zip codes. It populates 
+	 * processedViolations with the appropriate data.
+	 * 
+	 * @param allParkingViolations A list of all parking violations that were read in
+	 */
+	private void processViolations(List<ParkingViolation> allParkingViolations) {
+		for (ParkingViolation violation : allParkingViolations) {
+			if (violation.getState().equals("PA") && violation.getZip() != 0) {
+				processedViolations.add(violation);
+			}
+		}
 	}
 
 	/**
-	 * populateTotalFines takes in the list of parking violations and uses its
-	 * data to aggregate the total cost of parking violations in each zip code
+	 * populateTotalFines uses the list of processed parking violations 
+	 * to aggregate the total cost of parking violations in each zip code
 	 * in the totalFines hashmap.
-	 * @param allParkingViolations A list of all parking violations in PA with zip codes
+	 * 
 	 */
-	private void populateTotalFines(List<ParkingViolation> allParkingViolations) {
-		for (ParkingViolation violation : allParkingViolations) {
+	private void populateTotalFines() {
+		for (ParkingViolation violation : processedViolations) {
 			int zip = violation.getZip();
 			double fine = violation.getFine();
 			
@@ -71,6 +89,14 @@ public class FinesAnalysis {
 			// Automatically excludes zips in population without fines
 			finesPerCapita.put(zip, finePerCapita);
 		}
+	}
+	
+	/**
+	 * getProcessedViolations() is a getter for the processedViolations list.
+	 * @return List of violations that occurred in PA with a valid zip code.
+	 */
+	public List<ParkingViolation> getProcessedViolations() {
+		return processedViolations;
 	}
 
 	/**
