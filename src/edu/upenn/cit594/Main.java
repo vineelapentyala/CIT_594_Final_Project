@@ -40,13 +40,13 @@ public class Main {
 		
 		PopulationReader myPopulationReader = new PopulationReader(populationInputFilename);
 		
-		//Call ui Writer, write fines.txt based on allParkingViolations
-		Writer myWriter = new Writer();
-		myWriter.txtWriter(myParkingReader.getAllParkingViolations(), "fines.txt");
-				
 		//Pass list of allParkingViolations and population data to Constructor of Processor
 		FinesAnalysis myFinesAnalysis = new FinesAnalysis(myParkingReader.getAllParkingViolations(), myPopulationReader.getPopulationMap());
 		
+		//Call ui Writer, write fines.txt based on processed parking violations
+		Writer myWriter = new Writer();
+		myWriter.txtWriter(myFinesAnalysis.getProcessedViolations(), "fines.txt");
+				
 		// print total.txt
 		myWriter.txtWriter(myFinesAnalysis.getTotalFines(), "total.txt");		
 		
