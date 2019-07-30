@@ -47,7 +47,9 @@ public class FinesAnalysis {
 		populationReader = new PopulationReader(popFileName);
 
 		processViolations();
+		printViolations();
 		populateTotalFines();
+		printTotalFines();
 		populateFinesPerCapita();
 	}
 
@@ -64,6 +66,11 @@ public class FinesAnalysis {
 				processedViolations.add(violation);
 			}
 		}
+	}
+	
+	private void printViolations() {
+		TxtWriter violationWriter = new TxtWriter("fines.txt");
+		violationWriter.writeFromList(processedViolations);
 	}
 
 	/**
@@ -82,6 +89,11 @@ public class FinesAnalysis {
 		}
 
 	}
+	
+	private void printTotalFines() {
+		TxtWriter totalFineWriter = new TxtWriter("total.txt");
+		totalFineWriter.writeFromMap(totalFines);
+	}
 
 	/**
 	 * populateFinesPerCapita uses the existing totalFines hashmap and map of zip
@@ -94,7 +106,7 @@ public class FinesAnalysis {
 
 			Map<Integer, Integer> populationMap = populationReader.getPopulationMap();
 
-			// TODO Write this in README
+			// Skip zip codes that do not have populations
 			if (!populationMap.containsKey(zip)) {
 				continue;
 			}
@@ -107,24 +119,6 @@ public class FinesAnalysis {
 			// Automatically excludes zips in population without fines
 			finesPerCapita.put(zip, finePerCapita);
 		}
-	}
-
-	/**
-	 * getProcessedViolations() is a getter for the processedViolations list.
-	 * 
-	 * @return List of violations that occurred in PA with a valid zip code.
-	 */
-	public List<ParkingViolation> getProcessedViolations() {
-		return processedViolations;
-	}
-
-	/**
-	 * getTotalFines() is a getter for the totalFines hashmap.
-	 * 
-	 * @return Map of zip code : total fines in that zip code.
-	 */
-	public Map<Integer, Double> getTotalFines() {
-		return totalFines;
 	}
 
 	/**

@@ -26,11 +26,9 @@ public class Main {
 		try {
 			analysis = new FinesAnalysis(fileFormat, parkViolateFilename, populationInputFilename);
 
-			// Call UI tier and print to txt and console as appropriate
+			// Call UI tier and print final result to console
 			ConsoleWriter myWriter = new ConsoleWriter();
-			myWriter.txtWriter(analysis.getProcessedViolations(), "fines.txt");
-			myWriter.txtWriter(analysis.getTotalFines(), "total.txt");
-			myWriter.consoleWriter(analysis.getFinesPerCapita());
+			myWriter.write(analysis.getFinesPerCapita());
 
 		} catch (Exception e) {
 			e.printStackTrace();
