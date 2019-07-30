@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import edu.upenn.cit594.processor.FinesAnalysis;
-import edu.upenn.cit594.ui.Writer;
+import edu.upenn.cit594.ui.ConsoleWriter;
 
 public class Main {
 
@@ -27,7 +27,7 @@ public class Main {
 			analysis = new FinesAnalysis(fileFormat, parkViolateFilename, populationInputFilename);
 
 			// Call UI tier and print to txt and console as appropriate
-			Writer myWriter = new Writer();
+			ConsoleWriter myWriter = new ConsoleWriter();
 			myWriter.txtWriter(analysis.getProcessedViolations(), "fines.txt");
 			myWriter.txtWriter(analysis.getTotalFines(), "total.txt");
 			myWriter.consoleWriter(analysis.getFinesPerCapita());

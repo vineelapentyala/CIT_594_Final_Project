@@ -13,7 +13,7 @@ import java.util.Map;
  * the user. It is able to print to txt file and console.
  *
  */
-public class Writer {
+public class ConsoleWriter {
 
 	/**
 	 * txtWriter is overloaded to take a List of ParkingViolation data and 
