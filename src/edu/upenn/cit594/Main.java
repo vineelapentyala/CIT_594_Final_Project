@@ -20,49 +20,40 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("no errors");
 
-		// Take arguments
+		// Store arguments
 		String fileFormat = args[0];
 		String parkViolateFilename = args[1]; // this String has file suffix .csv or .json
 		String populationInputFilename = args[2];
 
-		// For all parking violations: create AllParkingViolations in constructor of
-		// ParkingReader
-		ParkingReader myParkingReader;
-
-		// Instantiate the correct reader class
+		// Build Processor tier with appropriate arguments
+		FinesAnalysis analysis;
+		
 		try {
-			if (fileFormat.equals("csv")) {
-				myParkingReader = new CSVReader(parkViolateFilename);
-
-			} else {
-				myParkingReader = new JSONReader(parkViolateFilename);
-
-			}
-
-			PopulationReader myPopulationReader = new PopulationReader(populationInputFilename);
-
-			// Pass list of allParkingViolations and population data to Constructor of
-			// Processor
-			FinesAnalysis myFinesAnalysis = new FinesAnalysis(myParkingReader.getAllParkingViolations(),
-					myPopulationReader.getPopulationMap());
+			analysis = new FinesAnalysis(fileFormat, parkViolateFilename, populationInputFilename);
 
 			// Call ui Writer, write fines.txt based on processed parking violations
 			Writer myWriter = new Writer();
-			myWriter.txtWriter(myFinesAnalysis.getProcessedViolations(), "fines.txt");
+			myWriter.txtWriter(analysis.getProcessedViolations(), "fines.txt");
 
 			// print total.txt
-			myWriter.txtWriter(myFinesAnalysis.getTotalFines(), "total.txt");
+			myWriter.txtWriter(analysis.getTotalFines(), "total.txt");
 
 			// print result to console
-			myWriter.consoleWriter(myFinesAnalysis.getFinesPerCapita());
+			myWriter.consoleWriter(analysis.getFinesPerCapita());
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
+	/**
+	 * Helper method to throw exceptions if arguments are incorrect
+	 * 
+	 * @param args Arguments from command line
+	 * @throws IOException
+	 */
 	private static void errorCheckArgs(String[] args) throws IOException {
 		// check number of args
 		if (args.length != 3) {
@@ -80,7 +71,7 @@ public class Main {
 		}
 
 		// Check that file can be opened
-		if (!parkingFile.canRead() || !populationFile.exists()) {
+		if (!parkingFile.canRead() || !populationFile.canRead()) {
 			throw new IOException("At least one of the files cannot be opened.");
 		}
 
