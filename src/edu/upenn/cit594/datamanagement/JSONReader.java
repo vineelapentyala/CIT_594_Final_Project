@@ -22,12 +22,13 @@ public class JSONReader extends ParkingReader {
 	}
 
 	/**
-	 * parseJSON reads the parking violations data from a .json file and stores all
+	 * parse reads the parking violations data from a .json file and stores all
 	 * valid parking violations to 'allParkingViolations' List
 	 * 
 	 * @param inputFileName String name of file to be read
 	 * 
 	 */
+	@Override
 	public void parse(String inputFileName) throws FileNotFoundException, IOException, ParseException {
 		JSONParser parser = new JSONParser();
 		JSONArray allViolationLines = (JSONArray) parser.parse(new FileReader(inputFileName));

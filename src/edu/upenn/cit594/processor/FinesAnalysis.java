@@ -13,6 +13,7 @@ import edu.upenn.cit594.datamanagement.*;
  * FinesAnalysis class is part of the Processor tier. It performs the
  * calculations of total fines per zip code and fines per capita in each zip
  * code, then stores this data into appropriate maps for the UI tier to access.
+ * It also sends data the data management tier to print to txt files.
  *
  */
 public class FinesAnalysis {
@@ -26,7 +27,8 @@ public class FinesAnalysis {
 	/**
 	 * FinesAnalysis constructor initializes the appropriate instance variables and
 	 * constructs the appropriate ParkingReader and PopulationReader objects. It
-	 * uses these objects to populate its own list and maps.
+	 * uses these objects to populate its own list and maps. It then allows for
+	 * data writing.
 	 * 
 	 * @param parkingFormat   "csv" or "json"
 	 * @param parkingFileName Full name of file with parking violation data
@@ -68,6 +70,10 @@ public class FinesAnalysis {
 		}
 	}
 	
+	/**
+	 * printViolations creates an instance of TxtWriter in order to write the
+	 * list of processed violations to a txt file. 
+	 */
 	private void printViolations() {
 		TxtWriter violationWriter = new TxtWriter("fines.txt");
 		violationWriter.writeFromList(processedViolations);
@@ -90,6 +96,10 @@ public class FinesAnalysis {
 
 	}
 	
+	/**
+	 * printTotalFInes creates an instance of TxtWriter in order to write the
+	 * map of zip codes to total fines to a txt file. 
+	 */
 	private void printTotalFines() {
 		TxtWriter totalFineWriter = new TxtWriter("total.txt");
 		totalFineWriter.writeFromMap(totalFines);

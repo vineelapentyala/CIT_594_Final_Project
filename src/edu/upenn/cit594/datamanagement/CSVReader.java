@@ -15,12 +15,15 @@ public class CSVReader extends ParkingReader {
 	}
 
 	/**
-	 * parseCSV reads the parking violations data from a .csv file and stores all
-	 * valid parking violations to 'allParkingViolations' List
+	 * parse reads the parking violations data from a .csv file and stores all valid
+	 * parking violations to 'allParkingViolations' List
 	 * 
 	 * @param inputFileName String name of file to be read
 	 * @throws FileNotFoundException
+	 * 
 	 */
+	
+	@Override
 	public void parse(String inputFileName) throws FileNotFoundException {
 		File inputFile = new File(inputFileName);
 

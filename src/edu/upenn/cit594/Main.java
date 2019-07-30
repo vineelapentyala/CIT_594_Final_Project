@@ -20,7 +20,7 @@ public class Main {
 		String parkViolateFilename = args[1]; // this String has file suffix .csv or .json
 		String populationInputFilename = args[2];
 
-		// Build Processor tier with appropriate arguments
+		// Build Processor tier
 		FinesAnalysis analysis;
 
 		try {

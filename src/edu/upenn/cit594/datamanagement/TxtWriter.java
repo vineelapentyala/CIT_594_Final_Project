@@ -8,9 +8,19 @@ import java.util.Map;
 
 import edu.upenn.cit594.data.ParkingViolation;
 
+/**
+ * TxtWriter class allows the program to print data to a txt file from either a
+ * List or a Map.
+ *
+ */
 public class TxtWriter {
 	String fileName; // To be written to
 
+	/**
+	 * The constructor simply populates the name of file to be written to.
+	 * 
+	 * @param fileName
+	 */
 	public TxtWriter(String fileName) {
 		this.fileName = fileName;
 	}
@@ -19,7 +29,7 @@ public class TxtWriter {
 	 * writeFromList takes a List of ParkingViolation data and print it to a txt
 	 * file with one zip code and fine per line.
 	 * 
-	 * @param myData   A List of Parking Violations
+	 * @param myData A List of Parking Violations
 	 */
 	public void writeFromList(List<ParkingViolation> myData) {
 		// initialize file to be overwritten
@@ -43,7 +53,7 @@ public class TxtWriter {
 	 * writeFromMap takes a Map of zip codes to total fines and print to a txt file
 	 * with one zip code and fine per line.
 	 * 
-	 * @param myData   a Map of zip codes to total fines
+	 * @param myData a Map of zip codes to total fines
 	 */
 	public void writeFromMap(Map<Integer, Double> myData) {
 		// initialize file to be overwritten
