@@ -74,8 +74,8 @@ public class Writer {
 		// print in ascending order from TreeSet
 		for (Map.Entry<Integer, Double> entry : myData.entrySet()) {
 			// space delimited
-			// TODO Only print 4 decimal places 
-			System.out.print(entry.getKey() + " " + entry.getValue() + "\n");
+			// Only print 4 decimal places 
+			System.out.format("%d %.4f\n", entry.getKey(), entry.getValue());
 		}
 	}
 }
