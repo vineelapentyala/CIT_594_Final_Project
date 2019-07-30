@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class CSVReader extends ParkingReader {
-	public CSVReader(String inputFileName) {
+	public CSVReader(String inputFileName) throws Exception {
 		super(inputFileName);
 	}
 

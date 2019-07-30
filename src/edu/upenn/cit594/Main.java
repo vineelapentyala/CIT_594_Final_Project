@@ -29,29 +29,34 @@ public class Main {
 		
 		// For all parking violations: create AllParkingViolations in constructor of ParkingReader
 		ParkingReader myParkingReader;
-		
+				
 		// Instantiate the correct reader class
 		if (fileFormat.equals("csv")) {
-			myParkingReader = new CSVReader(parkViolateFilename);
-		}
-		else {
-			myParkingReader = new JSONReader(parkViolateFilename);
-		}
-		
-		PopulationReader myPopulationReader = new PopulationReader(populationInputFilename);
-		
-		//Pass list of allParkingViolations and population data to Constructor of Processor
-		FinesAnalysis myFinesAnalysis = new FinesAnalysis(myParkingReader.getAllParkingViolations(), myPopulationReader.getPopulationMap());
-		
-		//Call ui Writer, write fines.txt based on processed parking violations
-		Writer myWriter = new Writer();
-		myWriter.txtWriter(myFinesAnalysis.getProcessedViolations(), "fines.txt");
+			try {
+				myParkingReader = new CSVReader(parkViolateFilename);
+				myParkingReader = new JSONReader(parkViolateFilename);
 				
-		// print total.txt
-		myWriter.txtWriter(myFinesAnalysis.getTotalFines(), "total.txt");		
+				PopulationReader myPopulationReader = new PopulationReader(populationInputFilename);
+				
+				//Pass list of allParkingViolations and population data to Constructor of Processor
+				FinesAnalysis myFinesAnalysis = new FinesAnalysis(myParkingReader.getAllParkingViolations(), myPopulationReader.getPopulationMap());
+				
+				//Call ui Writer, write fines.txt based on processed parking violations
+				Writer myWriter = new Writer();
+				myWriter.txtWriter(myFinesAnalysis.getProcessedViolations(), "fines.txt");
+						
+				// print total.txt
+				myWriter.txtWriter(myFinesAnalysis.getTotalFines(), "total.txt");		
+				
+				// print result to console
+				myWriter.consoleWriter(myFinesAnalysis.getFinesPerCapita());
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 		
-		// print result to console
-		myWriter.consoleWriter(myFinesAnalysis.getFinesPerCapita());
 
 	}
 	

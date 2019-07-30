@@ -12,7 +12,7 @@ import org.json.simple.parser.ParseException;
 
 public class JSONReader extends ParkingReader {
 
-	public JSONReader(String inputFileName) {
+	public JSONReader(String inputFileName) throws Exception {
 		super(inputFileName);
 	}
 
