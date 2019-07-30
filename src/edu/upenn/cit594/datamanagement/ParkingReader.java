@@ -19,31 +19,36 @@ import edu.upenn.cit594.data.ParkingViolation;
 
 public abstract class ParkingReader {
 
-    private List<ParkingViolation> allParkingViolations;
+	String inputFileName;
+	private List<ParkingViolation> allParkingViolations;
+	
+	public ParkingReader(String inputFileName) {
+		this.inputFileName = inputFileName;
+	}
 
-    /**
-     * storeParkingViolations takes in zip and fines as arguments, creates a
-     * ParkingViolation Object from them and stores them to allParkingViolations
-     * List
-     * 
-     * @param zip  zipcode where a parking violation occurred
-     * @param fine amount of fine issued for the parking violation
-     */
-    public void storeParkingViolations(int zip, double fine, String state) {
-	ParkingViolation thisViolation = new ParkingViolation(zip, fine, state);
-	allParkingViolations.add(thisViolation);
-    }
+	/**
+	 * storeParkingViolations takes in zip and fines as arguments, creates a
+	 * ParkingViolation Object from them and stores them to allParkingViolations
+	 * List
+	 * 
+	 * @param zip  zipcode where a parking violation occurred
+	 * @param fine amount of fine issued for the parking violation
+	 */
+	public void storeParkingViolations(int zip, double fine, String state) {
+		ParkingViolation thisViolation = new ParkingViolation(zip, fine, state);
+		allParkingViolations.add(thisViolation);
+	}
 
-    public abstract void parse(String inputFileName) throws Exception;
+	public abstract void parse() throws Exception;
 
-    /**
-     * getAllParkingViolations is a getter method for 'allParkingViolations' List
-     * 
-     * @return allParkingViolations A list of all parking violations in PA with zip
-     *         codes
-     */
-    public List<ParkingViolation> getAllParkingViolations() {
-	return allParkingViolations;
-    }
+	/**
+	 * getAllParkingViolations is a getter method for 'allParkingViolations' List
+	 * 
+	 * @return allParkingViolations A list of all parking violations in PA with zip
+	 *         codes
+	 */
+	public List<ParkingViolation> getAllParkingViolations() {
+		return allParkingViolations;
+	}
 
 }

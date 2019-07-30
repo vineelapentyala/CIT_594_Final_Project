@@ -7,6 +7,8 @@ import java.io.IOException;
 import edu.upenn.cit594.*;
 import edu.upenn.cit594.processor.FinesAnalysis;
 import edu.upenn.cit594.ui.Writer;
+import edu.upenn.cit594.datamanagement.CSVReader;
+import edu.upenn.cit594.datamanagement.JSONReader;
 import edu.upenn.cit594.datamanagement.ParkingReader;
 import edu.upenn.cit594.datamanagement.PopulationReader;
 
@@ -18,7 +20,7 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("no errors");
+		System.out.println("no errors"); 
 
 		//Take arguments 
 		String fileFormat = args[0];
@@ -26,7 +28,16 @@ public class Main {
 		String populationInputFilename = args[2];
 		
 		// For all parking violations: create AllParkingViolations in constructor of ParkingReader
-		ParkingReader myParkingReader = new ParkingReader(parkViolateFilename, fileFormat); 
+		ParkingReader myParkingReader;
+		
+		// Instantiate the correct reader class
+		if (fileFormat.equals("csv")) {
+			myParkingReader = new CSVReader(parkViolateFilename);
+		}
+		else {
+			myParkingReader = new JSONReader(parkViolateFilename);
+		}
+		
 		PopulationReader myPopulationReader = new PopulationReader(populationInputFilename);
 		
 		//Call ui Writer, write fines.txt based on allParkingViolations
@@ -57,7 +68,7 @@ public class Main {
 		File populationFile = new File(args[2]);
 		// Check that file exists
 		if (!parkingFile.exists() || !populationFile.exists()) {
-			throw new FileNotFoundException("At least one of the files does not exist.");
+			throw new IOException("At least one of the files does not exist.");
 		}
 		
 		// Check that file can be opened
