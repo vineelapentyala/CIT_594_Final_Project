@@ -23,8 +23,8 @@ public abstract class ParkingReader {
 	private List<ParkingViolation> allParkingViolations;
 	
 	public ParkingReader(String inputFileName) throws Exception {
+	    	allParkingViolations = new ArrayList<ParkingViolation>();
 		this.inputFileName = inputFileName;
-		
 		parse();
 	}
 

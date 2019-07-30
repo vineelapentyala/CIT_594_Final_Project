@@ -27,7 +27,6 @@ public class CSVReader extends ParkingReader {
 	    if (violationLine.length == 7) {
 		zip = Integer.parseInt(violationLine[6]);
 	    }
-
 	    double fine = Integer.parseInt(violationLine[1]);
 	    String state = violationLine[4];
 	    storeParkingViolations(zip, fine, state);

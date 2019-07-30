@@ -1,5 +1,6 @@
 package edu.upenn.cit594.processor;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,9 +27,9 @@ public class FinesAnalysis {
 	 * @param populationMap A Map of PA zip codes to population
 	 */
 	public FinesAnalysis(List<ParkingViolation> allParkingViolations, Map<Integer, Integer> populationMap) {
+	        processedViolations = new ArrayList<ParkingViolation>();
 		totalFines = new HashMap<Integer, Double>();
 		finesPerCapita = new TreeMap<Integer, Double>();
-		
 		processViolations(allParkingViolations);
 		populateTotalFines();
 		populateFinesPerCapita(populationMap);
