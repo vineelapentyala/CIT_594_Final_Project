@@ -22,7 +22,7 @@ public class CSVReader extends ParkingReader {
 	 * @throws FileNotFoundException
 	 * 
 	 */
-	
+
 	@Override
 	public void parse(String inputFileName) throws FileNotFoundException {
 		File inputFile = new File(inputFileName);

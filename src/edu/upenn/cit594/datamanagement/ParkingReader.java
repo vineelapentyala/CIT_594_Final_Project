@@ -35,7 +35,7 @@ public abstract class ParkingReader {
 	 * @throws Exception
 	 */
 	public abstract void parse(String inputFileName) throws Exception;
-	
+
 	/**
 	 * storeParkingViolations takes in zip and fines as arguments, creates a
 	 * ParkingViolation Object from them and stores them to allParkingViolations

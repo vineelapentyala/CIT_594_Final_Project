@@ -53,7 +53,7 @@ public class Main {
 
 		File parkingFile = new File(args[1]);
 		File populationFile = new File(args[2]);
-		
+
 		// Check that files exist
 		if (!parkingFile.exists() || !populationFile.exists()) {
 			throw new IOException("At least one of the files does not exist.");

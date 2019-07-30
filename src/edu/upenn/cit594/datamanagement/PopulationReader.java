@@ -20,9 +20,9 @@ public class PopulationReader {
 	private Map<Integer, Integer> populationMap;
 
 	/**
-	 * PopulationReader constructor initializes its map instance variable and
-	 * calls a parse method to read the population text file and store its
-	 * data in the map variable.
+	 * PopulationReader constructor initializes its map instance variable and calls
+	 * a parse method to read the population text file and store its data in the map
+	 * variable.
 	 * 
 	 * @param inputFileName The name of the population file to be read
 	 */
@@ -47,7 +47,7 @@ public class PopulationReader {
 	 * parseTxt reads the population data from a .txt file and stores the data to
 	 * populationMap
 	 * 
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	private void parseTxt(String inputFileName) {
 		File inputFile = new File(inputFileName);
