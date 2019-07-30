@@ -1,11 +1,6 @@
 package edu.upenn.cit594.datamanagement;
 
-import java.io.*;
 import java.util.*;
-
-import org.json.simple.*;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import edu.upenn.cit594.data.ParkingViolation;
 
@@ -19,29 +14,41 @@ import edu.upenn.cit594.data.ParkingViolation;
 
 public abstract class ParkingReader {
 
-	String inputFileName;
 	private List<ParkingViolation> allParkingViolations;
-	
+
+	/**
+	 * ParkingReader constructor initializes the allParkingViolations list and calls
+	 * the parse method to store the data read into the list.
+	 * 
+	 * @param inputFileName String name of file to be read
+	 * @throws Exception
+	 */
 	public ParkingReader(String inputFileName) throws Exception {
-	    	allParkingViolations = new ArrayList<ParkingViolation>();
-		this.inputFileName = inputFileName;
-		parse();
+		allParkingViolations = new ArrayList<ParkingViolation>();
+		parse(inputFileName);
 	}
 
+	/**
+	 * parse will parse the input file and store its data into allParkingViolations.
+	 * 
+	 * @param inputFileName String name of file to be read
+	 * @throws Exception
+	 */
+	public abstract void parse(String inputFileName) throws Exception;
+	
 	/**
 	 * storeParkingViolations takes in zip and fines as arguments, creates a
 	 * ParkingViolation Object from them and stores them to allParkingViolations
 	 * List
 	 * 
-	 * @param zip  zipcode where a parking violation occurred
-	 * @param fine amount of fine issued for the parking violation
+	 * @param zip   zipcode where a parking violation occurred
+	 * @param fine  amount of fine issued for the parking violation
+	 * @param state state where the parking violation occurred
 	 */
 	public void storeParkingViolations(int zip, double fine, String state) {
 		ParkingViolation thisViolation = new ParkingViolation(zip, fine, state);
 		allParkingViolations.add(thisViolation);
 	}
-
-	public abstract void parse() throws Exception;
 
 	/**
 	 * getAllParkingViolations is a getter method for 'allParkingViolations' List

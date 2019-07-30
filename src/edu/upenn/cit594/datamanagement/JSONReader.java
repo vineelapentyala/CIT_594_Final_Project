@@ -10,6 +10,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * JSONReader inherits from ParkingReader class. It specifically manages reading
+ * from a JSON input file by using JSONParser
+ *
+ */
 public class JSONReader extends ParkingReader {
 
 	public JSONReader(String inputFileName) throws Exception {
@@ -20,9 +25,10 @@ public class JSONReader extends ParkingReader {
 	 * parseJSON reads the parking violations data from a .json file and stores all
 	 * valid parking violations to 'allParkingViolations' List
 	 * 
-	 * @param inputFileName .json file with the parking violations information
+	 * @param inputFileName String name of file to be read
+	 * 
 	 */
-	public void parse() throws FileNotFoundException, IOException, ParseException {
+	public void parse(String inputFileName) throws FileNotFoundException, IOException, ParseException {
 		JSONParser parser = new JSONParser();
 		JSONArray allViolationLines = (JSONArray) parser.parse(new FileReader(inputFileName));
 		Iterator iter = allViolationLines.iterator();

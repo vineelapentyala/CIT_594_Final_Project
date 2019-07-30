@@ -1,16 +1,10 @@
 package edu.upenn.cit594;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import edu.upenn.cit594.*;
 import edu.upenn.cit594.processor.FinesAnalysis;
 import edu.upenn.cit594.ui.Writer;
-import edu.upenn.cit594.datamanagement.CSVReader;
-import edu.upenn.cit594.datamanagement.JSONReader;
-import edu.upenn.cit594.datamanagement.ParkingReader;
-import edu.upenn.cit594.datamanagement.PopulationReader;
 
 public class Main {
 
@@ -28,18 +22,14 @@ public class Main {
 
 		// Build Processor tier with appropriate arguments
 		FinesAnalysis analysis;
-		
+
 		try {
 			analysis = new FinesAnalysis(fileFormat, parkViolateFilename, populationInputFilename);
 
-			// Call ui Writer, write fines.txt based on processed parking violations
+			// Call UI tier and print to txt and console as appropriate
 			Writer myWriter = new Writer();
 			myWriter.txtWriter(analysis.getProcessedViolations(), "fines.txt");
-
-			// print total.txt
 			myWriter.txtWriter(analysis.getTotalFines(), "total.txt");
-
-			// print result to console
 			myWriter.consoleWriter(analysis.getFinesPerCapita());
 
 		} catch (Exception e) {
@@ -65,12 +55,13 @@ public class Main {
 
 		File parkingFile = new File(args[1]);
 		File populationFile = new File(args[2]);
-		// Check that file exists
+		
+		// Check that files exist
 		if (!parkingFile.exists() || !populationFile.exists()) {
 			throw new IOException("At least one of the files does not exist.");
 		}
 
-		// Check that file can be opened
+		// Check that files can be opened
 		if (!parkingFile.canRead() || !populationFile.canRead()) {
 			throw new IOException("At least one of the files cannot be opened.");
 		}

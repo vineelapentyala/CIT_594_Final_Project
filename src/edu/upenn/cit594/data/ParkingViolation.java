@@ -10,40 +10,45 @@ public class ParkingViolation {
 	private int zip;
 	private double fine;
 	private String state;
-	
+
 	/**
 	 * Initializes the zip code and fine instance variables
-	 * @param zip Zip Code of parking violation
-	 * @param fine Price of the parking violation fine
+	 * 
+	 * @param zip   Zip Code of parking violation
+	 * @param fine  Price of the parking violation fine
+	 * @param state State where the violation occurred
 	 */
-	public ParkingViolation (int zip, double fine, String state){
+	public ParkingViolation(int zip, double fine, String state) {
 		this.zip = zip;
 		this.fine = fine;
 		this.state = state;
 	}
-	
+
 	/**
 	 * Gets the fine.
+	 * 
 	 * @return Double value of fine
 	 */
 	public double getFine() {
 		return fine;
 	}
-	
+
 	/**
 	 * Gets the zip.
+	 * 
 	 * @return Int value of zip
 	 */
 	public int getZip() {
 		return zip;
 	}
-	
+
 	/**
 	 * Gets the state.
+	 * 
 	 * @return String value of state
 	 */
 	public String getState() {
 		return state;
 	}
-	
+
 }
