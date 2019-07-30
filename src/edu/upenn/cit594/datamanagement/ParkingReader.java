@@ -17,19 +17,9 @@ import edu.upenn.cit594.data.ParkingViolation;
  *
  */
 
-public class ParkingReader {
+public abstract class ParkingReader {
 
     private List<ParkingViolation> allParkingViolations;
-
-    public ParkingReader(String inputFileName, String fileFormat) {
-	allParkingViolations = new ArrayList<ParkingViolation>();
-
-	if (fileFormat.equals("csv")) {
-	    parseCSV(inputFileName);
-	} else if (fileFormat.equals("json")) {
-	    parseJSON(inputFileName);
-	}
-    }
 
     /**
      * storeParkingViolations takes in zip and fines as arguments, creates a
@@ -39,70 +29,12 @@ public class ParkingReader {
      * @param zip  zipcode where a parking violation occurred
      * @param fine amount of fine issued for the parking violation
      */
-    private void storeParkingViolations(int zip, double fine) {
-	ParkingViolation thisViolation = new ParkingViolation(zip, fine);
+    public void storeParkingViolations(int zip, double fine, String state) {
+	ParkingViolation thisViolation = new ParkingViolation(zip, fine, state);
 	allParkingViolations.add(thisViolation);
     }
 
-    /**
-     * parseCSV reads the parking violations data from a .csv file and stores all
-     * valid parking violations to 'allParkingViolations' List
-     * 
-     * @param inputFileName .csv file with the parking violations information
-     * @throws FileNotFoundException
-     */
-    private void parseCSV(String inputFileName) {
-	File inputFile = new File(inputFileName);
-	try {
-	    Scanner s = new Scanner(inputFile);
-	    while (s.hasNextLine()) {
-		String line = s.nextLine();
-		String[] violationLine = line.split(",");
-		if (violationLine.length == 7) {
-		    if (violationLine[6] != null && violationLine[4].equals("PA")) {
-			int zip = Integer.parseInt(violationLine[6]);
-			double fine = Integer.parseInt(violationLine[1]);
-			storeParkingViolations(zip, fine);		
-		    }
-		}
-	    }
-	    s.close();
-	} catch (FileNotFoundException e) {
-	    System.out.println("Incorrect CSV input File name"); // error message to be displayed when input filename
-	    // cannot
-	    // be found
-	}
-    }
-
-    /**
-     * parseJSON reads the parking violations data from a .json file and stores all
-     * valid parking violations to 'allParkingViolations' List
-     * 
-     * @param inputFileName .json file with the parking violations information
-     */
-    private void parseJSON(String inputFileName) {
-	JSONParser parser = new JSONParser();
-
-	try {
-	    JSONArray allViolationLines = (JSONArray) parser.parse(new FileReader(inputFileName));
-	    Iterator iter = allViolationLines.iterator();
-	    while (iter.hasNext()) {
-		JSONObject violationLine = (JSONObject) iter.next();
-		if (!violationLine.get("zip_code").equals("") && violationLine.get("state").equals("PA")) {
-		    int zip = Integer.parseInt((String) violationLine.get("zip_code"));
-		    double fine =((Long) violationLine.get("fine")).doubleValue();
-		    storeParkingViolations(zip, fine);
-		}
-	    }
-
-	} catch (FileNotFoundException e) {
-	    System.out.println("Incorrect JSON input File name");
-	} catch (IOException e) {
-	    System.out.println("IO Exception");
-	} catch (ParseException e) {
-	    System.out.println("ParseException");
-	}
-    }
+    public abstract void parse(String inputFileName) throws Exception;
 
     /**
      * getAllParkingViolations is a getter method for 'allParkingViolations' List
