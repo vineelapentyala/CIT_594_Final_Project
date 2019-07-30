@@ -20,62 +20,65 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("no errors"); 
+		System.out.println("no errors");
 
-		//Take arguments 
+		// Take arguments
 		String fileFormat = args[0];
 		String parkViolateFilename = args[1]; // this String has file suffix .csv or .json
 		String populationInputFilename = args[2];
-		
-		// For all parking violations: create AllParkingViolations in constructor of ParkingReader
+
+		// For all parking violations: create AllParkingViolations in constructor of
+		// ParkingReader
 		ParkingReader myParkingReader;
-				
+
 		// Instantiate the correct reader class
-		if (fileFormat.equals("csv")) {
-			try {
+		try {
+			if (fileFormat.equals("csv")) {
 				myParkingReader = new CSVReader(parkViolateFilename);
+
+			} else {
 				myParkingReader = new JSONReader(parkViolateFilename);
-				
-				PopulationReader myPopulationReader = new PopulationReader(populationInputFilename);
-				
-				//Pass list of allParkingViolations and population data to Constructor of Processor
-				FinesAnalysis myFinesAnalysis = new FinesAnalysis(myParkingReader.getAllParkingViolations(), myPopulationReader.getPopulationMap());
-				
-				//Call ui Writer, write fines.txt based on processed parking violations
-				Writer myWriter = new Writer();
-				myWriter.txtWriter(myFinesAnalysis.getProcessedViolations(), "fines.txt");
-						
-				// print total.txt
-				myWriter.txtWriter(myFinesAnalysis.getTotalFines(), "total.txt");		
-				
-				// print result to console
-				myWriter.consoleWriter(myFinesAnalysis.getFinesPerCapita());
 
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
+
+			PopulationReader myPopulationReader = new PopulationReader(populationInputFilename);
+
+			// Pass list of allParkingViolations and population data to Constructor of
+			// Processor
+			FinesAnalysis myFinesAnalysis = new FinesAnalysis(myParkingReader.getAllParkingViolations(),
+					myPopulationReader.getPopulationMap());
+
+			// Call ui Writer, write fines.txt based on processed parking violations
+			Writer myWriter = new Writer();
+			myWriter.txtWriter(myFinesAnalysis.getProcessedViolations(), "fines.txt");
+
+			// print total.txt
+			myWriter.txtWriter(myFinesAnalysis.getTotalFines(), "total.txt");
+
+			// print result to console
+			myWriter.consoleWriter(myFinesAnalysis.getFinesPerCapita());
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
-		
-
 	}
-	
+
 	private static void errorCheckArgs(String[] args) throws IOException {
 		// check number of args
-		if(args.length != 3) {
-			throw new IllegalArgumentException("Exactly 3 arguments required");		
-		// check if args[0] is either csv or json
+		if (args.length != 3) {
+			throw new IllegalArgumentException("Exactly 3 arguments required");
+			// check if args[0] is either csv or json
 		} else if (!args[0].equals("csv") && !args[0].equals("json")) {
 			throw new IllegalArgumentException("First argument must be either csv or json, case sensitive");
 		}
-		
+
 		File parkingFile = new File(args[1]);
 		File populationFile = new File(args[2]);
 		// Check that file exists
 		if (!parkingFile.exists() || !populationFile.exists()) {
 			throw new IOException("At least one of the files does not exist.");
 		}
-		
+
 		// Check that file can be opened
 		if (!parkingFile.canRead() || !populationFile.exists()) {
 			throw new IOException("At least one of the files cannot be opened.");
