@@ -27,8 +27,8 @@ public class Main {
 			analysis = new FinesAnalysis(fileFormat, parkViolateFilename, populationInputFilename);
 
 			// Call UI tier and print final result to console
-			ConsoleWriter myWriter = new ConsoleWriter();
-			myWriter.write(analysis.getFinesPerCapita());
+			ConsoleWriter myWriter = new ConsoleWriter(analysis);
+			myWriter.write();
 
 		} catch (Exception e) {
 			e.printStackTrace();
