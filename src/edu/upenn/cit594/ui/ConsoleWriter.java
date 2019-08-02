@@ -7,21 +7,27 @@ import edu.upenn.cit594.processor.FinesAnalysis;
 /**
  * Writer class handles the user interface with presenting the analyzed data to
  * the user. It is able to print to txt file and console. It has an instance of
- * the processor tier's FinesAnalysis object. 
+ * the processor tier's FinesAnalysis object.
  *
  */
 public class ConsoleWriter {
-	
+
 	FinesAnalysis analysis;
-	
-	public ConsoleWriter (FinesAnalysis analysis) {
+
+	/**
+	 * The ConsoleWriter constructor takes in a FinesAnalysis object and initializes
+	 * the instance variable.
+	 * 
+	 * @param analysis A FinesAnalysis object
+	 */
+	public ConsoleWriter(FinesAnalysis analysis) {
 		this.analysis = analysis;
 	}
 
 	/**
-	 * write takes a Map of zip codes to fines per capita, accessed via the 
-	 * FinesAnalysis object it contains, and prints the information to console
-	 * with one zip code and fine per line. 
+	 * write takes a Map of zip codes to fines per capita, accessed via the
+	 * FinesAnalysis object it contains, and prints the information to console with
+	 * one zip code and fine per line.
 	 * 
 	 */
 	public void write() {
